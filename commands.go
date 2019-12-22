@@ -31,7 +31,6 @@ func commandHelp(user *model.User) {
 }
 
 func commandStartReport(user *model.User) {
-	// Send generic message
 	sendStartReportMessage(user.ChatID)
 }
 
