@@ -109,7 +109,7 @@ func SetUpPersistentMenu() gin.HandlerFunc {
 		if isOn {
 			setPersistentMenu()
 		} else {
-			removeGetStarted()
+			removePersistentMenu()
 		}
 	}
 }
