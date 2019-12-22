@@ -3,7 +3,6 @@ package main
 import (
 	"errors"
 	"github.com/imbaggaarm/fb-stranger-bot/model"
-	"github.com/imbaggaarm/go-messenger"
 	"log"
 	"math/rand"
 	"strings"
@@ -33,24 +32,7 @@ func commandHelp(user *model.User) {
 
 func commandStartReport(user *model.User) {
 	// Send generic message
-	buttons := []messenger.Button{
-		{
-			Type:    "postback",
-			Title:   "18+",
-			Payload: "#report 18+",
-		},
-		{
-			Type:    "postback",
-			Title:   "Bất lịch sự",
-			Payload: "#report impolite",
-		},
-		{
-			Type:    "postback",
-			Title:   "Lỗi chatbot",
-			Payload: "#report bug",
-		},
-	}
-	sendButtonMessage(user.ChatID, "Hãy chọn nội dung dưới đây để báo cáo nhé:", buttons)
+	sendStartReportMessage(user.ChatID)
 }
 
 func commandReport(user *model.User, command string) {

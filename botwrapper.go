@@ -1,21 +1,42 @@
 package main
 
-import "github.com/imbaggaarm/go-messenger"
+import . "github.com/imbaggaarm/go-messenger"
 
 func sendTextMessage(recipientID, text string) {
 	bot.SendTextMessage(recipientID, text)
 }
 
-func sendGenericMessage(recipientID string, elements []messenger.Element) {
+func sendGenericMessage(recipientID string, elements []Element) {
 	bot.SendGenericMessage(recipientID, elements)
 }
 
-func sendButtonMessage(recipientID, text string, buttons []messenger.Button) {
+func sendButtonMessage(recipientID, text string, buttons []Button) {
 	bot.SendButtonMessage(recipientID, text, buttons)
 }
 
+func sendStartReportMessage(recipientID string) {
+	buttons := []Button{
+		{
+			Type:    "postback",
+			Title:   "18+",
+			Payload: "#report 18+",
+		},
+		{
+			Type:    "postback",
+			Title:   "Bất lịch sự",
+			Payload: "#report impolite",
+		},
+		{
+			Type:    "postback",
+			Title:   "Lỗi chatbot",
+			Payload: "#report bug",
+		},
+	}
+	sendButtonMessage(recipientID, "Hãy chọn nội dung dưới đây để báo cáo nhé:", buttons)
+}
+
 func sendTitleMessage(recipientID, title, subtitle string) {
-	elements := []messenger.Element{
+	elements := []Element{
 		{
 			Title:    title,
 			Subtitle: subtitle,
@@ -24,12 +45,12 @@ func sendTitleMessage(recipientID, title, subtitle string) {
 	sendGenericMessage(recipientID, elements)
 }
 
-func sendQuickReplies(recipientID, text string, quickReplies []messenger.QuickReply) {
+func sendQuickReplies(recipientID, text string, quickReplies []QuickReply) {
 	bot.SendQuickReplies(recipientID, text, quickReplies)
 }
 
 func sendSetGenderQuickReplies(recipientID, text string) {
-	quickReplies := []messenger.QuickReply{
+	quickReplies := []QuickReply{
 		{
 			ContentType: "text",
 			Title:       "Nam",
@@ -55,7 +76,7 @@ func sendSetGenderQuickReplies(recipientID, text string) {
 }
 
 func sendStartChatQuickReplies(recipientID string, text string) {
-	quickReplies := []messenger.QuickReply{
+	quickReplies := []QuickReply{
 		{
 			ContentType: "text",
 			Title:       "Nam",
@@ -86,7 +107,7 @@ func sendStartChatQuickReplies(recipientID string, text string) {
 }
 
 func sendChatEnded(recipientID, title string) {
-	buttons := []messenger.Button{
+	buttons := []Button{
 		{
 			Type:    "postback",
 			Title:   "Report cá",
@@ -99,7 +120,7 @@ func sendChatEnded(recipientID, title string) {
 		},
 	}
 
-	elements := []messenger.Element{
+	elements := []Element{
 		{
 			Title:    title,
 			Subtitle: "Câu cá mới bạn nha...",
@@ -110,7 +131,7 @@ func sendChatEnded(recipientID, title string) {
 }
 
 func sendWelcomeBackMessage(recipientID string) {
-	buttons := []messenger.Button{
+	buttons := []Button{
 		{
 			Type:    "postback",
 			Title:   "Hướng dẫn",
@@ -122,7 +143,7 @@ func sendWelcomeBackMessage(recipientID string) {
 			Payload: "#start",
 		},
 	}
-	elements := []messenger.Element{
+	elements := []Element{
 		{
 			Title:    "Welcome back ^^",
 			Subtitle: "Cùng câu cá với mọi người nhé...",
@@ -133,7 +154,7 @@ func sendWelcomeBackMessage(recipientID string) {
 }
 
 func sendTapToStart(recipientID, subtitle string) {
-	buttons := []messenger.Button{
+	buttons := []Button{
 		{
 			Type:    "postback",
 			Title:   "Câu cá mới",
@@ -141,7 +162,7 @@ func sendTapToStart(recipientID, subtitle string) {
 		},
 	}
 
-	elements := []messenger.Element{
+	elements := []Element{
 		{
 			Title:    "Câu cá nào bạn ơiiii",
 			Subtitle: subtitle,
@@ -153,7 +174,7 @@ func sendTapToStart(recipientID, subtitle string) {
 }
 
 func sendOutOfWaitingRoom(recipientID string) {
-	buttons := []messenger.Button{
+	buttons := []Button{
 		{
 			Type:    "postback",
 			Title:   "Câu cá mới",
@@ -161,7 +182,7 @@ func sendOutOfWaitingRoom(recipientID string) {
 		},
 	}
 
-	elements := []messenger.Element{
+	elements := []Element{
 		{
 			Title:    "Đã thoát khỏi phòng chờ",
 			Subtitle: "Câu cá là phải kiên nhẫn nè :((",
@@ -172,7 +193,7 @@ func sendOutOfWaitingRoom(recipientID string) {
 }
 
 func sendDidUpdateGender(recipientID, gender string) {
-	buttons := []messenger.Button{
+	buttons := []Button{
 		{
 			Type:    "postback",
 			Title:   "Hướng dẫn sử dụng",
@@ -185,7 +206,7 @@ func sendDidUpdateGender(recipientID, gender string) {
 		},
 	}
 
-	elements := []messenger.Element{
+	elements := []Element{
 		{
 			Title:    "Giới tính của bạn là " + gender,
 			Subtitle: "Bạn chỉ thay đổi được giới tính của mình sau 30 ngày nữa.",
@@ -197,14 +218,14 @@ func sendDidUpdateGender(recipientID, gender string) {
 }
 
 func sendTurnOffSafeModeMessage(recipientID string) {
-	buttons := []messenger.Button{
+	buttons := []Button{
 		{
 			Type:    "postback",
 			Title:   "Tắt safe mode",
 			Payload: "#safe mode off",
 		},
 	}
-	elements := []messenger.Element{
+	elements := []Element{
 		{
 			Title:    "Người lạ vừa gửi bạn một tin nhắn có đính kèm",
 			Subtitle: "Nếu bạn muốn nhận tin nhắn này, hãy tắt safe mode nhé.",
@@ -215,7 +236,7 @@ func sendTurnOffSafeModeMessage(recipientID string) {
 }
 
 func sendErrorMessage(recipientID string) {
-	buttons := []messenger.Button{
+	buttons := []Button{
 		{
 			Type:    "postback",
 			Title:   "Báo cáo lỗi",
@@ -226,7 +247,7 @@ func sendErrorMessage(recipientID string) {
 }
 
 func setGetStarted() {
-	gsPayload := messenger.Payload{GetStarted: &messenger.GetStarted{Payload: kCommandGetStarted}}
+	gsPayload := Payload{GetStarted: &GetStarted{Payload: kCommandGetStarted}}
 	bot.SetGetStarted(gsPayload)
 }
 
@@ -238,7 +259,7 @@ func setPersistentMenu() {
 	// TODO: Build help url
 	// TODO: Set button types in library
 
-	buttons := []messenger.Button{
+	buttons := []Button{
 		{
 			Type:    "postback",
 			Title:   "End chat",
@@ -256,7 +277,7 @@ func setPersistentMenu() {
 			Payload: "#report",
 		},
 	}
-	pmPayload := messenger.Payload{PersistentMenu: []messenger.PersistentMenu{
+	pmPayload := Payload{PersistentMenu: []PersistentMenu{
 		{
 			Locale:                "vn_vi",
 			ComposerInputDisabled: false,
