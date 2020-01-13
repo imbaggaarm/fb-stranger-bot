@@ -46,7 +46,7 @@ func sendTitleMessage(recipientID, title, subtitle string) {
 }
 
 func sendQuickReplies(recipientID, text string, quickReplies []QuickReply) {
-	bot.SendQuickReplies(recipientID, text, quickReplies)
+	bot.SendQuickReplies(recipientID, text, nil, quickReplies)
 }
 
 func sendSetGenderQuickReplies(recipientID, text string) {
